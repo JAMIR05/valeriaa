@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Pintar </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      text-align: center;
+      padding: 20px;
+    }
+
+    #modal {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #fff;
+      padding: 25px 20px;
+      border-radius: 20px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+      z-index: 1000;
+    }
+
+    #modal button {
+      margin-top: 15px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 15px;
+      background: #b54b7a;
+      color: #fff;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <script>
+    if (localStorage.getItem("accesoValeria") !== "true") {
+      window.location.href = "clave.html";
+    }
+  </script>
+
+
+  <!-- Modal mensaje “No avances” -->
+  <div id="modal">
+    <p>No avance :)</p>
+    <a href="index.html">⬅ Volver al inicio</a>
+  </div>
+
+  <script>
+    <a href="index.html">⬅ Volver al inicio</a>
+    const modal = document.getElementById('modal');
+    const btnOk = document.getElementById('ok');
+
+    btnOk.addEventListener('click', () => {
+      modal.style.display = 'none';
+    });
+
+  </script>
+</body>
+</html>

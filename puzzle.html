@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Rompecabezas 🧩</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <script>
+    if (localStorage.getItem("accesoValeria") !== "true") {
+      window.location.href = "clave.html";
+    }
+  </script>
+<!-- musica.html -->
+<audio id="musica" src="music.mp3" loop></audio>
+
+<script>
+  const musica = document.getElementById('musica');
+  window.addEventListener('load', () => {
+    musica.play().catch(() => {
+      // Si el navegador bloquea autoplay, se puede mostrar un mensaje o botón
+      console.log("La música no se pudo reproducir automáticamente");
+    });
+  });
+</script>
+
+
+  <h1>🧩 Rompecabezas Especial 🧩</h1>
+  <p id="mensaje">¿Estás lista para armar a una princesa? 👑</p>
+
+  <div id="puzzle"></div>
+
+  <a href="index.html">⬅ Volver al inicio</a>
+
+  <script src="puzzle.js"></script>
+</body>
+</html>

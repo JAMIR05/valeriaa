@@ -1,0 +1,276 @@
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #ffe4ec, #e6e6fa);
+  color: #333;
+  text-align: center;
+  padding: 15px;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* Títulos */
+h1 {
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.8em;
+  color: #b54b7a;
+  margin-bottom: 15px;
+}
+
+/* Texto */
+p {
+  font-size: 1em;
+  margin-bottom: 10px;
+}
+
+/* Botones y enlaces */
+button, a {
+  display: block;
+  width: 90%;
+  margin: 10px auto;
+  padding: 12px;
+  font-size: 1.1em;
+  text-decoration: none;
+  background: #b54b7a;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  transition: 0.3s;
+}
+button:hover, a:hover {
+  background: #6a4c93;
+}
+
+/* Frases */
+.contenedor-frases {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.carta {
+  background: #fff;
+  padding: 15px;
+  border-radius: 15px;
+  font-size: 1em;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  position: relative;
+}
+.carta::before {
+  content: "💖";
+  font-size: 1.2em;
+  position: absolute;
+  top: -8px;
+  right: -8px;
+}
+
+/* Canvas (pintar) */
+canvas {
+  border: 2px solid #b54b7a;
+  border-radius: 10px;
+  margin-top: 15px;
+  touch-action: none; /* mejora en móvil */
+}
+
+/* Rompecabezas */
+#puzzle {
+  display: grid;
+  grid-template-columns: repeat(3, 100px);
+  grid-template-rows: repeat(3, 100px);
+  gap: 2px;
+  margin: 10px auto;
+  width: max-content;
+  touch-action: none;          /* evita scroll mientras arrastras (móvil) */
+  -webkit-user-select: none;
+  user-select: none;
+}
+.pieza {
+  width: 100px;
+  height: 100px;
+  background-image: url("foto.jpeg"); /* pon tu imagen aquí */
+  background-size: 300px 300px;       /* 3x3 de 100px */
+  border: 1px solid #ccc;
+  cursor: grab;
+  touch-action: none;
+}
+
+/* Cada pieza muestra un trozo distinto según data-pos (se mantiene al mezclar) */
+.pieza[data-pos="1"] { background-position:   0    0; }
+.pieza[data-pos="2"] { background-position: -100px 0; }
+.pieza[data-pos="3"] { background-position: -200px 0; }
+.pieza[data-pos="4"] { background-position:   0  -100px; }
+.pieza[data-pos="5"] { background-position: -100px -100px; }
+.pieza[data-pos="6"] { background-position: -200px -100px; }
+.pieza[data-pos="7"] { background-position:   0  -200px; }
+.pieza[data-pos="8"] { background-position: -100px -200px; }
+.pieza[data-pos="9"] { background-position: -200px -200px; }
+
+/* Animaciones al “sujetar” */
+.pieza.sujeta {
+  transform: scale(1.1) rotate(3deg);
+  transition: transform 0.2s ease;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+  border: 2px solid #b54b7a;
+}
+.pieza.invisible { opacity: 0; }
+
+/* Animación de aparición */
+.carta.aparecer {
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.contenedor-frase {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.carta {
+  background: #fff;
+  padding: 30px 20px;
+  border-radius: 20px;
+  font-size: 1.3em;
+  color: #6a4c93;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+  margin: 20px auto;
+  max-width: 320px;
+  min-height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  text-align: center;
+}
+
+/* Esquinas decoradas con corazones */
+.carta::before, .carta::after {
+  content: "💖";
+  font-size: 1.5em;
+  position: absolute;
+}
+.carta::before {
+  top: 8px;
+  left: 10px;
+}
+.carta::after {
+  bottom: 8px;
+  right: 10px;
+}
+
+.contador {
+  font-size: 1em;
+  color: #b54b7a;
+  font-weight: bold;
+}
+
+.carta.aparecer {
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+#puzzle {
+  display: grid;
+  grid-template-columns: repeat(3, 100px);
+  grid-template-rows: repeat(3, 100px);
+  gap: 2px;
+  margin: 20px auto;
+  width: max-content;
+}
+
+.pieza {
+  width: 100px;
+  height: 100px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.pieza.seleccionada {
+  transform: scale(1.1);
+  box-shadow: 0 0 10px #ff69b4;
+}
+
+/* Pantalla de carga */
+#loader {
+  text-align: center;
+  width: 300px;
+  margin: auto;
+  font-size: 1.3em;
+  color: #b54b7a;
+}
+
+.bar {
+  width: 100%;
+  height: 20px;
+  background: #eee;
+  border-radius: 10px;
+  margin-top: 10px;
+  overflow: hidden;
+  box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+}
+
+.fill {
+  height: 100%;
+  width: 1%;
+  background: linear-gradient(90deg, #ff6ec7, #ffa8e2, #ffc6ff);
+  border-radius: 10px;
+  transition: width 0.2s ease;
+}
+
+/* Efecto flash */
+.flash {
+  animation: flash 2s forwards;
+}
+@keyframes flash {
+  0% { background: #fff; opacity: 0; }
+  50% { background: #fff; opacity: 1; }
+  100% { background: transparent; opacity: 0; }
+}
+
+/* Imagen final revelada con brillos */
+.revelada {
+  animation: aparecer 1.5s ease forwards, brillos 3s infinite;
+}
+
+@keyframes aparecer {
+  0% { transform: scale(0.5); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes brillos {
+  0% { filter: drop-shadow(0 0 5px #ff8ed1); }
+  50% { filter: drop-shadow(0 0 20px #ffd6f6); }
+  100% { filter: drop-shadow(0 0 5px #ff8ed1); }
+}
+
+.corazones {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.heart {
+  position: absolute;
+  bottom: 0;
+  font-size: 1.5em;
+  animation: subir 4s linear forwards;
+}
+
+@keyframes subir {
+  0% { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(-300px); opacity: 0; }
+}
