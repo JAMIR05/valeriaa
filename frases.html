@@ -24,17 +24,11 @@
   <a href="index.html">⬅ Volver al inicio</a>
 
   <script src="frases.js"></script>
-  <audio id="musica" src="music.mp3" loop></audio>
-
-
-  
-
-
-</script>
+  <!-- musica.html -->
 <audio id="musica" src="music.mp3" loop></audio>
 
 <script>
-  const music = document.getElementById('musica');
+  const musica = document.getElementById('musica');
   window.addEventListener('load', () => {
     musica.play().catch(() => {
       // Si el navegador bloquea autoplay, se puede mostrar un mensaje o botón
@@ -45,4 +39,5 @@
 
 </body>
 </html>
+
 
